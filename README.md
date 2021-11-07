@@ -5,3 +5,5 @@ Simple script that automates setting a new scheduled task to run a malicious pay
 Import the script on your target machine and just execute using powershell :
 ```powershell 
 PS /home/pi0x73/Desktop>.\Powersistence.ps1```
+
+![img](/img/Powersistence.png)
