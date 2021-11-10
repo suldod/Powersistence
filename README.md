@@ -7,4 +7,4 @@ Import the script on your target machine and just execute using powershell :
 PS /home/pi0x73/Desktop>.\Powersistence.ps1 -Path 'C:\Path\To\Executable.exe'
 ```
 
-![img](img/powersistence.png)
+![img](img/Powersistence.png)
